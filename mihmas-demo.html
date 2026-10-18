@@ -1,0 +1,1035 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>[hidden]{display:none!important}body{margin:0}</style></head><body><title>محماس للقهوة</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Kufi+Arabic:wght@500;700&family=Almarai:wght@400;700&display=swap">
+<style>
+/* Layout: محاذاة لليمين، شريط تجريبي ثم بطل بلون البن المحمّص يتصدره اسم «محماس» بخط الرقعة، ثم أقسام بعرض ثابت تتناوب بين الأرضية الفاتحة وأسطح بيضاء، وسلة جانبية ونوافذ منبثقة للتخصيص والتتبع */
+:root{
+  --bg:#f1f2ee; --surface:#ffffff; --ink:#1c2620; --muted:#5f6a63; --line:#dde2da;
+  --roast:#4a2c1e; --roast-ink:#f6ede4; --roast-muted:#cbb4a3;
+  --saffron:#c98a1c; --saffron-soft:#f6ead2; --on-saffron:#2a1a0f;
+  --cardamom:#3f6b4b; --cardamom-soft:#e2ece4;
+  --good:#2f7a4f; --warn:#b7791f; --bad:#b4472f;
+  --shadow:0 18px 40px rgba(28,38,32,.14);
+  --ruqaa:"Aref Ruqaa","Noto Kufi Arabic",serif;
+  --kufi:"Noto Kufi Arabic","Almarai",Tahoma,sans-serif;
+  --body:"Almarai","Noto Kufi Arabic",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121713; --surface:#1a211c; --ink:#eef0ea; --muted:#a3ada5; --line:#2b342e;
+  --roast:#2b1b13; --roast-ink:#f6ede4; --roast-muted:#c4ab98;
+  --saffron:#e3a843; --saffron-soft:#3a2d17; --on-saffron:#20140a;
+  --cardamom:#7fb08b; --cardamom-soft:#1f2e24;
+  --good:#6fc493; --warn:#e2b45a; --bad:#e38469;
+  --shadow:0 18px 40px rgba(0,0,0,.45); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121713; --surface:#1a211c; --ink:#eef0ea; --muted:#a3ada5; --line:#2b342e;
+  --roast:#2b1b13; --roast-ink:#f6ede4; --roast-muted:#c4ab98;
+  --saffron:#e3a843; --saffron-soft:#3a2d17; --on-saffron:#20140a;
+  --cardamom:#7fb08b; --cardamom-soft:#1f2e24;
+  --good:#6fc493; --warn:#e2b45a; --bad:#e38469;
+  --shadow:0 18px 40px rgba(0,0,0,.45); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--roast)}
+h1,h2,h3,h4{font-family:var(--kufi);line-height:1.35;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--saffron);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* شريط النموذج */
+.demo{background:var(--saffron);color:var(--on-saffron);font-size:13px}
+.demo .wrap{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:space-between;align-items:center;padding-block:7px}
+.demo a{font-weight:700}
+
+/* التنقل */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--roast);color:var(--roast-ink);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.brand{font-family:var(--ruqaa);font-size:30px;line-height:1;text-decoration:none;color:var(--roast-ink);padding-top:6px}
+.links{display:flex;gap:4px;margin-inline-start:auto;list-style:none;padding:0;margin-block:0}
+.links a{display:block;padding:7px 12px;border-radius:999px;text-decoration:none;font-size:14px;color:var(--roast-muted)}
+.links a:hover{color:var(--roast-ink);background:rgba(255,255,255,.07)}
+.links a.owner{color:var(--saffron)}
+.cart-btn{display:inline-flex;align-items:center;gap:8px;background:var(--saffron);color:var(--on-saffron);border:0;border-radius:999px;padding:8px 16px;font-weight:700;font-family:var(--kufi);font-size:14px}
+.cart-btn svg{width:18px;height:18px}
+.cart-btn .badge{background:var(--on-saffron);color:var(--saffron);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+@media (max-width:900px){.links{display:none}.nav .cart-btn{margin-inline-start:auto}}
+
+/* البطل */
+.hero{background:var(--roast);color:var(--roast-ink);overflow:hidden;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:48px 56px}
+.hero-copy{display:grid;gap:18px;position:relative;z-index:1}
+.status{display:inline-flex;align-items:center;gap:9px;width:fit-content;font-size:13px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.status i{width:8px;height:8px;border-radius:50%;background:#8fd0a2;box-shadow:0 0 0 4px rgba(143,208,162,.18)}
+.status.closed i{background:#e09a7e;box-shadow:0 0 0 4px rgba(224,154,126,.18)}
+.wordmark{font-family:var(--ruqaa);font-size:clamp(84px,14vw,156px);line-height:1.45;color:var(--saffron);margin:-10px 0 -28px;letter-spacing:0}
+.hero h1{font-size:clamp(24px,3.4vw,36px);font-weight:700;max-width:20ch}
+.hero .lead{color:var(--roast-muted);max-width:48ch;font-size:16.5px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:12px 22px;font-weight:700;font-family:var(--kufi);font-size:14.5px;border:1px solid transparent;text-decoration:none;transition:transform .12s ease,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-saffron{background:var(--saffron);color:var(--on-saffron)}
+.btn-ghost{border-color:rgba(255,255,255,.22);color:var(--roast-ink);background:transparent}
+.btn-ghost:hover{border-color:var(--saffron);color:var(--saffron)}
+.btn-ink{background:var(--ink);color:var(--bg)}
+.btn-line{border-color:var(--line);background:var(--surface);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:13.5px;color:var(--roast-muted);padding-top:6px}
+.hero-facts b{color:var(--roast-ink);font-family:var(--kufi);font-size:16px;display:block}
+
+.hero-art{position:relative;display:grid;place-items:center;min-height:380px}
+.hero-art svg.pan{width:min(100%,430px);height:auto}
+.steam path{animation:rise 3.6s ease-in-out infinite;transform-origin:center bottom}
+.steam path:nth-child(2){animation-delay:1.1s}.steam path:nth-child(3){animation-delay:2.2s}
+@keyframes rise{0%{opacity:0;transform:translateY(14px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-26px)}}
+.order-chip{position:absolute;inset-block-end:18px;inset-inline-start:0;background:var(--surface);color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:grid;gap:2px;min-width:200px}
+.order-chip small{color:var(--muted);font-size:12px}
+.order-chip b{font-family:var(--kufi);font-size:15px}
+.order-chip .bar{height:5px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:6px}
+.order-chip .bar i{display:block;height:100%;width:62%;background:var(--good);border-radius:9px}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-block:32px 40px}.hero-art{min-height:300px;order:-1}.order-chip{inset-inline-start:8px}}
+
+/* أقسام عامة */
+.section{padding-block:80px}
+.section.tight{padding-top:0}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px;margin-bottom:28px}
+.head h2{font-size:clamp(24px,3vw,32px)}
+.head p{color:var(--muted);max-width:56ch}
+.kicker{font-family:var(--kufi);font-size:13px;color:var(--cardamom);font-weight:700;display:block;margin-bottom:6px}
+@media (max-width:640px){.section{padding-block:56px}}
+
+/* طرق الطلب */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mode{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;text-align:start;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
+.mode svg{width:34px;height:34px;grid-row:span 2;color:var(--cardamom)}
+.mode b{font-family:var(--kufi);font-size:15.5px}
+.mode span{color:var(--muted);font-size:13px}
+.mode[aria-pressed="true"]{border-color:var(--cardamom);background:var(--cardamom-soft)}
+@media (max-width:700px){.modes{grid-template-columns:1fr}}
+
+/* المنيو */
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:22px;scrollbar-width:thin}
+.cat{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-size:14px;font-family:var(--kufi)}
+.cat[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:14px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.item .art{aspect-ratio:16/10;max-width:100%;display:grid;place-items:center;position:relative;background:var(--saffron-soft)}
+.item[data-tone="green"] .art{background:var(--cardamom-soft)}
+.item .art svg{width:46%;height:auto;color:var(--roast)}
+:root[data-theme="dark"] .item .art svg{color:var(--roast-muted)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .item .art svg{color:var(--roast-muted)}}
+.item .tag{position:absolute;top:12px;inset-inline-start:12px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--surface);color:var(--ink)}
+.item .tag.new{background:var(--cardamom);color:var(--surface)}
+.item .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.item h3{font-size:16px}
+.item p{color:var(--muted);font-size:13.5px;line-height:1.6}
+.item .meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:10px}
+.price{font-family:var(--kufi);font-weight:700;font-size:17px}
+.price small{font-size:12px;color:var(--muted);font-weight:500}
+.kcal{font-size:12px;color:var(--muted)}
+.add{border:0;background:var(--ink);color:var(--bg);border-radius:12px;padding:8px 14px;font-weight:700;font-size:13.5px;font-family:var(--kufi);display:inline-flex;gap:6px;align-items:center}
+.add:hover{background:var(--cardamom)}
+.item.out{opacity:.55}
+.item.out .add{background:var(--line);color:var(--muted);cursor:not-allowed}
+.menu-note{margin-top:18px;font-size:12.5px;color:var(--muted)}
+
+/* العروض */
+.offers{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.offer{border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;min-height:200px;border:1px solid var(--line);background:var(--surface)}
+.offer.main{background:var(--roast);color:var(--roast-ink);border-color:transparent}
+.offer.main p{color:var(--roast-muted)}
+.offer .when{font-size:12.5px;font-weight:700;color:var(--cardamom)}
+.offer.main .when{color:var(--saffron)}
+.offer h3{font-size:20px}
+.offer p{color:var(--muted);font-size:14px}
+.offer .code{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.code-pill{font-family:var(--kufi);font-weight:700;letter-spacing:.08em;border:1.5px dashed currentColor;border-radius:10px;padding:5px 12px;font-size:14px;direction:ltr}
+.offer .btn{width:fit-content;margin-top:auto}
+@media (max-width:900px){.offers{grid-template-columns:1fr}}
+
+/* الحجز */
+.book{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.spaces{display:grid;gap:12px}
+.space{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:16px;text-align:start}
+.space svg{width:40px;height:40px;color:var(--cardamom)}
+.space b{font-family:var(--kufi);display:block}
+.space span{color:var(--muted);font-size:13px}
+.space em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--cardamom);white-space:nowrap}
+.space[aria-pressed="true"]{border-color:var(--cardamom);background:var(--cardamom-soft)}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.field .lbl{font-size:13px;color:var(--muted);font-weight:700}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:11px 13px;font-size:14.5px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--cardamom);outline-offset:0;border-color:transparent}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:7px 12px;font-size:13.5px}
+.slot[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.slot:disabled{text-decoration:line-through;opacity:.45;cursor:not-allowed}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:12px;overflow:hidden;width:fit-content;background:var(--bg)}
+.stepper button{border:0;background:transparent;width:40px;height:40px;font-size:18px}
+.stepper output{min-width:40px;text-align:center;font-weight:700}
+.confirm{display:grid;gap:8px;background:var(--cardamom-soft);border-radius:14px;padding:16px;border:1px solid var(--cardamom)}
+.confirm b{font-family:var(--kufi)}
+.err{color:var(--bad);font-size:13px}
+@media (max-width:900px){.book{grid-template-columns:1fr}}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+
+/* الولاء */
+.loyal{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.card-stamp{background:var(--roast);color:var(--roast-ink);border-radius:22px;padding:26px;display:grid;gap:16px;position:relative;overflow:hidden}
+.card-stamp .top{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.card-stamp .brandmini{font-family:var(--ruqaa);font-size:34px;line-height:1;color:var(--saffron)}
+.card-stamp p{color:var(--roast-muted)}
+.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:420px}
+.stamp{aspect-ratio:1;max-width:100%;border-radius:50%;border:1.5px dashed rgba(255,255,255,.28);display:grid;place-items:center}
+.stamp svg{width:58%;height:58%;opacity:0}
+.stamp.on{background:var(--saffron);border:0}
+.stamp.on svg{opacity:1;color:var(--on-saffron)}
+.stamp.free{border-color:var(--saffron);color:var(--saffron);font-size:11px;font-weight:700}
+.points{display:flex;gap:26px;flex-wrap:wrap}
+.points b{font-family:var(--kufi);font-size:22px;display:block}
+.points span{font-size:12.5px;color:var(--roast-muted)}
+.gift{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;display:grid;gap:14px;align-content:start}
+.gift h3{font-size:19px}
+.gift p{color:var(--muted);font-size:14px}
+.amounts{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:900px){.loyal{grid-template-columns:1fr}}
+
+/* الآراء */
+.reviews{display:grid;grid-template-columns:.7fr 1.3fr;gap:28px;align-items:start}
+.score b{font-family:var(--kufi);font-size:64px;line-height:1}
+.score .stars{color:var(--saffron);letter-spacing:3px;font-size:18px}
+.score p{color:var(--muted);font-size:13.5px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:10px;align-content:start}
+.quote p{font-size:14px}
+.quote footer{font-size:12.5px;color:var(--muted)}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}.quotes{grid-template-columns:1fr}}
+
+/* الزيارة */
+.visit{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:stretch}
+.hours{width:100%;border-collapse:collapse;font-size:14.5px}
+.hours td{padding:10px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:left;color:var(--muted)}
+.hours tr.today td{font-weight:700;color:var(--ink)}
+.hours tr.today td:first-child::after{content:"اليوم";margin-inline-start:8px;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--cardamom);color:var(--surface)}
+.contact{display:grid;gap:10px;margin-top:20px}
+.contact div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:8px;font-size:14.5px}
+.contact span:first-child{color:var(--muted)}
+.map{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--surface);min-height:340px;position:relative}
+.map svg{width:100%;height:100%;display:block;min-height:340px}
+.map .open{position:absolute;bottom:14px;inset-inline-start:14px}
+@media (max-width:900px){.visit{grid-template-columns:1fr}}
+
+/* لوحة صاحب المقهى */
+.owner-band{background:var(--surface);border-block:1px solid var(--line)}
+.dash{display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:2px}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.kpi b{font-family:var(--kufi);font-size:24px}
+.kpi small{font-size:12px;color:var(--good)}
+.dash-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+.panel{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}
+.panel h3{font-size:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.panel h3 small{font-family:var(--body);font-weight:400;color:var(--muted);font-size:12.5px}
+.orders{display:grid;gap:8px;max-height:420px;overflow:auto}
+.order{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;border-inline-start:4px solid var(--line)}
+.order.s0{border-inline-start-color:var(--warn)}
+.order.s1{border-inline-start-color:var(--saffron)}
+.order.s2{border-inline-start-color:var(--good)}
+.order.s3{opacity:.6}
+.order .no{font-family:var(--kufi);font-weight:700;font-size:14px}
+.order .what{font-size:13px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.order .what b{color:var(--ink);font-weight:700}
+.order.mine{box-shadow:0 0 0 2px var(--cardamom)}
+.pill{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.pill.s0{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.pill.s1{background:color-mix(in srgb,var(--saffron) 20%,transparent);color:var(--saffron)}
+.pill.s2{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.pill.s3{background:var(--line);color:var(--muted)}
+.order .act{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:5px 10px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.order-side{display:grid;justify-items:end;gap:6px}
+.chart svg{width:100%;height:auto;display:block}
+.stock{display:grid;gap:6px;margin-top:14px}
+.stock label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;padding:7px 0;border-bottom:1px dashed var(--line)}
+.switch{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;flex:none;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:16px;height:16px;border-radius:50%;background:var(--surface);transition:inset-inline-start .2s}
+.switch:checked{background:var(--good)}
+.switch:checked::after{inset-inline-start:19px}
+@media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}.dash-grid{grid-template-columns:1fr}}
+
+/* تذييل */
+footer.site{background:var(--roast);color:var(--roast-muted);padding-block:48px calc(28px + env(safe-area-inset-bottom,0px))}
+.foot{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+.foot .brand{font-size:44px;color:var(--saffron)}
+.foot h4{color:var(--roast-ink);font-size:15px;margin-bottom:10px}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:14px}
+.foot a{text-decoration:none}.foot a:hover{color:var(--saffron)}
+.credit{margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:13px}
+.credit b{color:var(--saffron)}
+@media (max-width:760px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
+
+/* السلة */
+.scrim{position:fixed;inset:0;background:rgba(10,14,11,.5);z-index:80;backdrop-filter:blur(2px)}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(440px,100%);background:var(--surface);z-index:90;display:flex;flex-direction:column;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);animation:slide .25s ease}
+@keyframes slide{from{transform:translateX(-30px);opacity:0}to{transform:none;opacity:1}}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.drawer header h2{font-size:19px}
+.x{border:0;background:var(--bg);width:36px;height:36px;border-radius:50%;font-size:16px}
+.drawer .scroll{flex:1;overflow:auto;padding:16px 20px;display:grid;gap:16px;align-content:start}
+.line{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding-bottom:12px;border-bottom:1px dashed var(--line)}
+.line b{font-family:var(--kufi);font-size:14.5px}
+.line .opts{font-size:12.5px;color:var(--muted);grid-column:1}
+.line .lp{font-weight:700;text-align:left}
+.qty{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:10px;grid-column:2;justify-self:end}
+.qty button{border:0;background:transparent;width:30px;height:30px}
+.qty span{min-width:22px;text-align:center;font-weight:700;font-size:13.5px}
+.empty{text-align:center;color:var(--muted);padding:40px 10px;display:grid;gap:12px;justify-items:center}
+.empty svg{width:56px;height:56px;color:var(--line)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--bg);padding:4px;border-radius:12px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:8px 4px;font-size:13px;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay button{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;font-weight:700;font-size:13.5px}
+.pay button[aria-pressed="true"]{border-color:var(--cardamom);background:var(--cardamom-soft)}
+.coupon{display:flex;gap:8px}
+.coupon input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 12px;direction:ltr;text-align:right}
+.totals{display:grid;gap:6px;font-size:14px}
+.totals div{display:flex;justify-content:space-between}
+.totals span:first-child{color:var(--muted)}
+.totals .grand{font-family:var(--kufi);font-size:18px;font-weight:700;padding-top:8px;border-top:1px solid var(--line)}
+.totals .grand span:first-child{color:var(--ink)}
+.drawer footer{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:8px}
+.drawer footer .btn{width:100%}
+.earn{font-size:12.5px;color:var(--cardamom);text-align:center}
+
+/* النوافذ */
+.modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);border-radius:22px;width:min(480px,100%);max-height:100%;overflow:auto;box-shadow:var(--shadow);animation:pop .22s ease}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.sheet .art{aspect-ratio:2/1;max-width:100%;display:grid;place-items:center;background:var(--saffron-soft);position:relative}
+.sheet .art svg{width:28%;height:auto;color:var(--roast)}
+.sheet .art .x{position:absolute;top:12px;inset-inline-end:12px}
+.sheet .in{padding:20px 22px 22px;display:grid;gap:16px}
+.sheet h3{font-size:20px}
+.opt-group{display:grid;gap:8px}
+.opt-group .lbl{font-size:13px;font-weight:700;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 13px;font-size:13.5px;font-weight:700}
+.chip small{font-weight:400;color:var(--muted);margin-inline-start:4px}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.75}
+.range{width:100%;accent-color:var(--cardamom)}
+.range-l{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.sheet .cta{display:flex;gap:12px;align-items:center}
+.sheet .cta .btn{flex:1}
+
+.track{padding:26px 24px;display:grid;gap:18px}
+.track .no{font-family:var(--kufi);font-size:14px;color:var(--muted)}
+.track h3{font-size:22px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:28px 1fr;gap:12px;position:relative;padding-bottom:20px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;inset-inline-start:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.steps li:last-child::before{display:none}
+.steps .dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:13px;position:relative;z-index:1}
+.steps li.done .dot{background:var(--good);border-color:var(--good);color:var(--surface)}
+.steps li.now .dot{border-color:var(--saffron);box-shadow:0 0 0 5px color-mix(in srgb,var(--saffron) 22%,transparent)}
+.steps b{font-family:var(--kufi);font-size:15px;display:block}
+.steps span{font-size:13px;color:var(--muted)}
+.track .note{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:13.5px}
+
+.toast{position:fixed;inset-inline:0;bottom:calc(20px + env(safe-area-inset-bottom,0px));margin-inline:auto;width:fit-content;max-width:calc(100% - 32px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;z-index:120;box-shadow:var(--shadow);animation:pop .2s ease}
+
+.fab{position:fixed;z-index:45;bottom:calc(16px + env(safe-area-inset-bottom,0px));inset-inline-start:calc(16px + env(safe-area-inset-left,0px));display:none}
+@media (max-width:900px){.fab{display:inline-flex}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+<!-- أيقونات مشتركة -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bean" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="6" ry="8.5" transform="rotate(30 12 12)" fill="currentColor"/><path d="M8.5 6.5c3 2.5 4 7.5 7 11" fill="none" stroke="var(--saffron)" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="demo">
+  <div class="wrap">
+    <span>نموذج توضيحي لموقع مقهى من تصميم <b>تكامل</b>. «محماس» مقهى خيالي، وكل الأسعار والطلبات والبيانات تجريبية.</span>
+    <a href="https://wa.me/966535033546" target="_blank" rel="noopener">اطلب موقعًا مثله لمقهاك</a>
+  </div>
+</div>
+
+<nav class="nav" aria-label="القائمة الرئيسية">
+  <div class="wrap">
+    <a class="brand" href="#top">محماس</a>
+    <ul class="links">
+      <li><a href="#menu">المنيو</a></li>
+      <li><a href="#offers">العروض</a></li>
+      <li><a href="#book">الحجز</a></li>
+      <li><a href="#rewards">نقاط الولاء</a></li>
+      <li><a href="#visit">الزيارة</a></li>
+      <li><a href="#owner" class="owner">لوحة صاحب المقهى</a></li>
+    </ul>
+    <button class="cart-btn" type="button" id="openCart" aria-label="فتح السلة"><svg aria-hidden="true"><use href="#i-bag"/></svg>السلة <span class="badge num" id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="status" id="status"><i></i><span id="statusText">مفتوح الآن حتى ٢ فجرًا</span></span>
+      <div class="wordmark" aria-hidden="true">محماس</div>
+      <h1>نحمّص البن بأيدينا كل صباح، ونقدّمه كما تحبه</h1>
+      <p class="lead">قهوة مختصة وقهوة سعودية بالزعفران والهيل، وحلا يُخبز اليوم. اطلب من جوالك واستلم من الفرع أو من سيارتك، أو نوصله لك.</p>
+      <div class="hero-actions">
+        <a class="btn btn-saffron" href="#menu">اطلب الآن</a>
+        <a class="btn btn-ghost" href="#book">احجز طاولة أو غرفة مذاكرة</a>
+      </div>
+      <div class="hero-facts">
+        <span><b class="num">4.8</b>تقييم الزوار</span>
+        <span><b>٧ دقائق</b>متوسط تجهيز الطلب</span>
+        <span><b>تحميص يومي</b>دفعات صغيرة ٢ كجم</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg class="pan" viewBox="0 0 420 380">
+        <circle cx="210" cy="200" r="168" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1.5"/>
+        <circle cx="210" cy="200" r="128" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1.5" stroke-dasharray="3 7"/>
+        <g class="steam" fill="none" stroke="var(--roast-muted)" stroke-width="3" stroke-linecap="round" opacity=".8">
+          <path d="M180 120c-10-14 10-22 0-38"/>
+          <path d="M210 112c-10-14 10-22 0-38"/>
+          <path d="M240 120c-10-14 10-22 0-38"/>
+        </g>
+        <!-- محماس: مقلاة التحميص بمقبضها الطويل -->
+        <path d="M60 214 L18 196" stroke="var(--saffron)" stroke-width="9" stroke-linecap="round"/>
+        <ellipse cx="210" cy="214" rx="150" ry="40" fill="var(--saffron)"/>
+        <path d="M60 214c0 46 67 78 150 78s150-32 150-78" fill="var(--saffron)"/>
+        <ellipse cx="210" cy="212" rx="134" ry="31" fill="#2a1a10"/>
+        <g fill="#7a4a2c">
+          <ellipse cx="160" cy="208" rx="11" ry="7" transform="rotate(-20 160 208)"/><ellipse cx="190" cy="198" rx="11" ry="7" transform="rotate(25 190 198)"/><ellipse cx="222" cy="212" rx="11" ry="7" transform="rotate(-35 222 212)"/><ellipse cx="252" cy="200" rx="11" ry="7" transform="rotate(10 252 200)"/><ellipse cx="282" cy="214" rx="11" ry="7" transform="rotate(-15 282 214)"/><ellipse cx="200" cy="224" rx="11" ry="7" transform="rotate(40 200 224)"/><ellipse cx="240" cy="226" rx="11" ry="7" transform="rotate(-5 240 226)"/><ellipse cx="135" cy="222" rx="10" ry="6.5" transform="rotate(30 135 222)"/>
+        </g>
+        <g fill="#a2683f">
+          <ellipse cx="175" cy="220" rx="10" ry="6.5" transform="rotate(10 175 220)"/><ellipse cx="268" cy="224" rx="10" ry="6.5" transform="rotate(35 268 224)"/><ellipse cx="300" cy="202" rx="9" ry="6" transform="rotate(-25 300 202)"/><ellipse cx="215" cy="196" rx="9" ry="6" transform="rotate(-10 215 196)"/>
+        </g>
+        <path d="M84 300 Q210 336 336 300" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+      </svg>
+      <div class="order-chip">
+        <small>طلب #1046 · درايف ثرو</small>
+        <b>سبانش لاتيه ×2 قيد التحضير</b>
+        <div class="bar"><i></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- طرق الطلب -->
+<section class="section" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker">كيف تستلم طلبك؟</span><h2>اختر طريقة الطلب</h2></div>
+      <p>تختارها مرة، وتظهر في السلة مع التفاصيل التي نحتاجها.</p>
+    </div>
+    <div class="modes" id="modes">
+      <button class="mode" type="button" data-mode="pickup" aria-pressed="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4z"/><path d="M3 10l2-5h14l2 5"/><path d="M10 20v-5h4v5"/></svg>
+        <b>استلام من الفرع</b><span>جاهز خلال ٧ دقائق تقريبًا</span>
+      </button>
+      <button class="mode" type="button" data-mode="drive" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="13" r="1"/><circle cx="16.5" cy="13" r="1"/></svg>
+        <b>درايف ثرو</b><span>نوصله لسيارتك برقم اللوحة</span>
+      </button>
+      <button class="mode" type="button" data-mode="delivery" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7M4 13h7l2-5h3l3 6.5"/><path d="M11 8H7"/></svg>
+        <b>توصيل</b><span>مجاني للطلبات فوق ١٠٠ ر.س</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- المنيو -->
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker">المنيو</span><h2>من المحماس إلى كوبك</h2></div>
+      <p>اضغط «أضف» لتختار الحجم ونوع الحليب ودرجة السكر. الأسعار شاملة ضريبة القيمة المضافة.</p>
+    </div>
+    <div class="cats" role="tablist" aria-label="أقسام المنيو" id="cats"></div>
+    <div class="menu" id="menuGrid"></div>
+    <p class="menu-note">يحتاج البالغون إلى ٢٠٠٠ سعرة حرارية يوميًا في المتوسط، وقد تختلف الاحتياجات من شخص لآخر.</p>
+  </div>
+</section>
+
+<!-- العروض -->
+<section class="section tight" id="offers">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker">العروض</span><h2>عروض هذا الأسبوع</h2></div>
+    </div>
+    <div class="offers">
+      <article class="offer main">
+        <span class="when">يوميًا ٣ – ٥ عصرًا</span>
+        <h3>ساعة المحماس: خصم ٢٠٪ على القهوة المختصة</h3>
+        <p>استراحة العصر على حسابنا تقريبًا. يُطبّق الخصم تلقائيًا على الطلبات داخل الوقت.</p>
+        <div class="code"><button class="btn btn-saffron" type="button" data-jump="specialty">اطلب قهوتك</button></div>
+      </article>
+      <article class="offer">
+        <span class="when">كود خصم للطلب الأول</span>
+        <h3>خصم ١٠٪ على أول طلب أونلاين</h3>
+        <p>اكتب الكود في السلة قبل الدفع.</p>
+        <div class="code"><span class="code-pill">MIHMAS10</span><button class="btn btn-line" type="button" id="copyCode">نسخ الكود</button></div>
+      </article>
+      <article class="offer">
+        <span class="when">باقة المذاكرة</span>
+        <h3>٣ ساعات في غرفة المذاكرة مع مشروبين</h3>
+        <p>غرفة هادئة بإنترنت سريع ومقابس عند كل مقعد، بسعر ٤٥ ر.س للشخص.</p>
+        <a class="btn btn-line" href="#book" data-space="study">احجز الباقة</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- الحجز -->
+<section class="section" id="book" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap book">
+    <div>
+      <div class="head" style="margin-bottom:20px"><div><span class="kicker">الحجز</span><h2>احجز مكانك قبل أن تصل</h2></div></div>
+      <div class="spaces" id="spaces">
+        <button class="space" type="button" data-space="table" aria-pressed="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 9h16M7 9v10M17 9v10M6 5h12"/></svg>
+          <span><b>طاولة</b><span>حتى ٨ أشخاص، داخلي أو خارجي</span></span><em>مجانًا</em>
+        </button>
+        <button class="space" type="button" data-space="study" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-7a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h7z"/></svg>
+          <span><b>غرفة المذاكرة</b><span>هادئة، ٣ ساعات مع مشروبين</span></span><em>٤٥ ر.س</em>
+        </button>
+        <button class="space" type="button" data-space="event" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5.6 5.6l2 2M3 12h3M18.4 5.6l-2 2M21 12h-3"/><path d="M6 21l3-9 6 6z"/></svg>
+          <span><b>جلسة خاصة</b><span>اجتماعات ومناسبات صغيرة حتى ٢٠ شخصًا</span></span><em>حسب الطلب</em>
+        </button>
+      </div>
+    </div>
+    <form class="form" id="bookForm" novalidate>
+      <div class="row2">
+        <div class="field"><label for="bDate">التاريخ</label><input type="date" id="bDate" required></div>
+        <div class="field"><span class="lbl" id="gLbl">عدد الأشخاص</span>
+          <div class="stepper" role="group" aria-labelledby="gLbl"><button type="button" id="gMinus" aria-label="إنقاص">−</button><output id="gOut" class="num">2</output><button type="button" id="gPlus" aria-label="زيادة">+</button></div>
+        </div>
+      </div>
+      <div class="field"><span class="lbl">الوقت</span><div class="slots" id="slots"></div></div>
+      <div class="row2">
+        <div class="field"><label for="bName">الاسم</label><input id="bName" autocomplete="name" placeholder="مثال: سارة" required></div>
+        <div class="field"><label for="bPhone">رقم الجوال</label><input id="bPhone" inputmode="tel" class="ltr" placeholder="05XXXXXXXX" required></div>
+      </div>
+      <div class="field"><label for="bNote">ملاحظة (اختياري)</label><textarea id="bNote" rows="2" placeholder="مثلًا: جلسة خارجية، أو احتفال بعيد ميلاد"></textarea></div>
+      <p class="err" id="bErr" hidden></p>
+      <button class="btn btn-ink" type="submit">تأكيد الحجز</button>
+      <div class="confirm" id="bOk" hidden></div>
+    </form>
+  </div>
+</section>
+
+<!-- الولاء -->
+<section class="section" id="rewards">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker">برنامج الولاء</span><h2>كل ٩ أكواب، العاشر علينا</h2></div>
+      <p>تُختم بطاقتك تلقائيًا مع كل طلب، وتجمع نقطة على كل ريال تستبدلها بمشروبات وحلا.</p>
+    </div>
+    <div class="loyal">
+      <div class="card-stamp">
+        <div class="top">
+          <div><div class="brandmini">محماس</div><p style="margin-top:6px">بطاقة الأختام · مثال لحساب عميل</p></div>
+          <span class="pill s2" id="stampLeft">باقي ٣ أكواب</span>
+        </div>
+        <div class="stamps" id="stamps"></div>
+        <div class="points">
+          <div><b class="num" id="ptsVal">340</b><span>نقطة في رصيدك</span></div>
+          <div><b class="num">500</b><span>نقطة = مشروب مجاني</span></div>
+          <div><b>فضّي</b><span>مستواك الحالي</span></div>
+        </div>
+      </div>
+      <div class="gift">
+        <h3>بطاقة هدية محماس</h3>
+        <p>أهدِ من تحب رصيدًا يصرفه في الفرع أو أونلاين. تصل برسالة نصية باسمك.</p>
+        <div class="amounts" id="giftAmounts">
+          <button class="chip" type="button" data-amt="50" aria-pressed="false">50 ر.س</button>
+          <button class="chip" type="button" data-amt="100" aria-pressed="true">100 ر.س</button>
+          <button class="chip" type="button" data-amt="200" aria-pressed="false">200 ر.س</button>
+        </div>
+        <div class="field"><label for="giftTo">اسم المُهدى إليه</label><input id="giftTo" placeholder="مثال: أبو فهد"></div>
+        <button class="btn btn-ink" type="button" id="addGift">أضف البطاقة إلى السلة</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الآراء -->
+<section class="section tight">
+  <div class="wrap reviews">
+    <div class="score">
+      <span class="kicker">آراء الزوار (أمثلة توضيحية)</span>
+      <b class="num">4.8</b>
+      <div class="stars" aria-label="٥ نجوم">★★★★★</div>
+      <p>تقييم المقهى على خرائط Google يظهر هنا ويتحدث تلقائيًا.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote" style="margin:0"><p>الطلب من الجوال وفّر علي الانتظار، وصلت ولقيت قهوتي جاهزة باسمي.</p><footer>عميل · طلب استلام</footer></figure>
+      <figure class="quote" style="margin:0"><p>القهوة السعودية بالزعفران مضبوطة، والدلة الصغيرة تكفي ثلاثة.</p><footer>عميلة · زيارة عائلية</footer></figure>
+      <figure class="quote" style="margin:0"><p>غرفة المذاكرة هادئة فعلًا، حجزتها من الموقع قبل الاختبارات.</p><footer>طالب · باقة المذاكرة</footer></figure>
+    </div>
+  </div>
+</section>
+
+<!-- الزيارة -->
+<section class="section" id="visit" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap visit">
+    <div>
+      <div class="head" style="margin-bottom:16px"><div><span class="kicker">الزيارة</span><h2>تجدنا هنا</h2></div></div>
+      <table class="hours num" aria-label="ساعات العمل"><tbody id="hours"></tbody></table>
+      <div class="contact">
+        <div><span>العنوان</span><span>طريق الملك عبدالعزيز، حي النموذج (عنوان تجريبي)</span></div>
+        <div><span>الجوال</span><span class="ltr num">05X XXX XXXX</span></div>
+        <div><span>المواقف</span><span>مواقف أمام المقهى ومسار خاص للدرايف ثرو</span></div>
+      </div>
+    </div>
+    <div class="map" aria-label="خريطة توضيحية لموقع المقهى">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="600" height="400" fill="var(--bg)"/>
+        <g fill="var(--cardamom-soft)"><rect x="40" y="40" width="150" height="110" rx="10"/><rect x="420" y="250" width="150" height="120" rx="10"/></g>
+        <g fill="var(--line)"><rect x="230" y="40" width="140" height="70" rx="8"/><rect x="230" y="140" width="60" height="80" rx="8"/><rect x="40" y="190" width="150" height="70" rx="8"/><rect x="40" y="290" width="70" height="80" rx="8"/><rect x="420" y="40" width="150" height="80" rx="8"/><rect x="420" y="150" width="70" height="70" rx="8"/></g>
+        <g stroke="var(--surface)" stroke-linecap="round"><path d="M0 170H600" stroke-width="22"/><path d="M210 0V400" stroke-width="22"/><path d="M395 0V400" stroke-width="16"/><path d="M0 275H395" stroke-width="12"/></g>
+        <text x="20" y="160" font-size="12" fill="var(--muted)" font-family="Almarai">طريق الملك عبدالعزيز</text>
+        <g transform="translate(318 236)">
+          <circle r="34" fill="var(--saffron)" opacity=".18"/>
+          <path d="M0 -30c-13 0-22 9-22 21 0 16 22 33 22 33s22-17 22-33c0-12-9-21-22-21z" fill="var(--roast)"/>
+          <circle cy="-9" r="8" fill="var(--saffron)"/>
+        </g>
+        <text x="318" y="300" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)" font-family="Noto Kufi Arabic">محماس</text>
+      </svg>
+      <a class="btn btn-ink open" href="https://www.google.com/maps" target="_blank" rel="noopener">الاتجاهات في خرائط Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- لوحة صاحب المقهى -->
+<section class="section" id="owner">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="kicker">لوحة صاحب المقهى</span><h2>كل الطلبات في شاشة واحدة</h2></div>
+      <p>جرّب: اطلب أي صنف من المنيو، وسيظهر طلبك هنا فورًا. حدّث حالته، أو أوقف صنفًا نفد فيختفي من الطلب.</p>
+    </div>
+    <div class="dash">
+      <div class="kpis">
+        <div class="kpi"><span>طلبات اليوم</span><b class="num" id="kOrders">0</b><small>+18٪ عن أمس</small></div>
+        <div class="kpi"><span>المبيعات اليوم</span><b class="num" id="kSales">0</b><small>شاملة الضريبة</small></div>
+        <div class="kpi"><span>متوسط الطلب</span><b class="num" id="kAvg">0</b><small>ر.س</small></div>
+        <div class="kpi"><span>طلبات أونلاين</span><b class="num" id="kOnline">0</b><small>دون عمولة تطبيقات</small></div>
+      </div>
+      <div class="dash-grid">
+        <div class="panel">
+          <h3>الطلبات الواردة <small id="liveNote">تتحدث مباشرة</small></h3>
+          <div class="orders" id="orders"></div>
+        </div>
+        <div class="panel">
+          <h3>الطلبات حسب الساعة <small>اليوم</small></h3>
+          <div class="chart" id="chart"></div>
+          <h3 style="margin-top:18px">توفر الأصناف <small>أوقف ما نفد</small></h3>
+          <div class="stock" id="stock"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand">محماس</div>
+        <p style="margin-top:8px;max-width:36ch">مقهى ومحمصة. نحمّص دفعات صغيرة كل صباح، ونقدّم القهوة المختصة والسعودية والحلا الطازج.</p>
+      </div>
+      <div>
+        <h4>الموقع</h4>
+        <ul><li><a href="#menu">المنيو والطلب</a></li><li><a href="#book">الحجز</a></li><li><a href="#rewards">نقاط الولاء وبطاقات الهدايا</a></li><li><a href="#owner">لوحة صاحب المقهى</a></li></ul>
+      </div>
+      <div>
+        <h4>طرق الدفع</h4>
+        <ul><li>مدى</li><li>Apple Pay</li><li>STC Pay</li><li>البطاقات الائتمانية</li></ul>
+      </div>
+    </div>
+    <div class="credit">
+      <span>© محماس للقهوة، اسم خيالي لأغراض العرض.</span>
+      <span>تصميم وتطوير <b>تكامل</b>، تكامل يضمن نموك · واتساب <span class="ltr num">0535033546</span></span>
+    </div>
+  </div>
+</footer>
+
+<button class="cart-btn fab" type="button" id="fabCart" aria-label="فتح السلة"><svg aria-hidden="true"><use href="#i-bag"/></svg><span class="num" id="fabTotal">0 ر.س</span></button>
+
+<!-- السلة -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="السلة" role="dialog" aria-modal="true">
+  <header><h2>سلتك</h2><button class="x" type="button" id="closeCart" aria-label="إغلاق">✕</button></header>
+  <div class="scroll" id="cartBody"></div>
+  <footer id="cartFoot"></footer>
+</aside>
+
+<!-- تخصيص الصنف -->
+<div class="modal" id="custom" hidden role="dialog" aria-modal="true" aria-labelledby="cTitle"><div class="sheet" id="customSheet"></div></div>
+<!-- تتبع الطلب -->
+<div class="modal" id="tracker" hidden role="dialog" aria-modal="true" aria-labelledby="tTitle"><div class="sheet" id="trackSheet"></div></div>
+
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+/* ===== رسومات الأصناف ===== */
+const ART = {
+  cup:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 40h48v14a24 24 0 0 1-48 0z" fill="currentColor" fill-opacity=".12"/><path d="M70 45h6a9 9 0 0 1 0 18h-8"/><path d="M14 86h64"/><path d="M36 30c-4-6 4-9 0-16M48 30c-4-6 4-9 0-16M60 30c-4-6 4-9 0-16" stroke-width="3" opacity=".6"/></svg>`,
+  glass:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M28 22h44l-6 64H34z" fill="currentColor" fill-opacity=".12"/><path d="M58 10l-6 30"/><rect x="38" y="44" width="11" height="11" rx="2" stroke-width="3"/><rect x="51" y="54" width="11" height="11" rx="2" stroke-width="3"/><path d="M31 40h38" stroke-width="3" opacity=".6"/></svg>`,
+  dallah:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M40 30h20l4 10-4 6 8 34H32l8-34-4-6z" fill="currentColor" fill-opacity=".12"/><path d="M50 18v12M44 18h12"/><path d="M36 42L16 30l4 12"/><path d="M64 48c12 0 16 10 10 22"/><path d="M28 86h44"/></svg>`,
+  finjan:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M28 46h44l-6 22a8 8 0 0 1-8 6H42a8 8 0 0 1-8-6z" fill="currentColor" fill-opacity=".12"/><path d="M34 82h32"/><path d="M42 36c-3-5 3-7 0-12M58 36c-3-5 3-7 0-12" stroke-width="3" opacity=".6"/></svg>`,
+  cake:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 70l56-34 14 26v16H16z" fill="currentColor" fill-opacity=".12"/><path d="M16 70h70M16 60l56-34 14 26"/><path d="M70 22v-8"/></svg>`,
+  cookie:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><circle cx="50" cy="52" r="30" fill="currentColor" fill-opacity=".12"/><g fill="currentColor" stroke="none"><circle cx="40" cy="42" r="4"/><circle cx="58" cy="38" r="4"/><circle cx="62" cy="58" r="4"/><circle cx="42" cy="62" r="4"/><circle cx="52" cy="50" r="3"/></g></svg>`,
+  croissant:`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 62c10-24 30-36 38-36s28 12 38 36c-8 6-16 6-22 2-4 8-12 10-16 10s-12-2-16-10c-6 4-14 4-22-2z" fill="currentColor" fill-opacity=".12"/><path d="M38 34l6 34M62 34l-6 34M50 28v44"/></svg>`
+};
+
+/* ===== المنيو ===== */
+const CATS = [
+  {id:"specialty", name:"قهوة مختصة"},
+  {id:"saudi", name:"قهوة سعودية وشاي"},
+  {id:"cold", name:"مشروبات باردة"},
+  {id:"sweet", name:"الحلا"},
+  {id:"bakery", name:"المخبوزات"}
+];
+const MENU = [
+  {id:"v60", cat:"specialty", name:"V60 إثيوبيا جوجي", desc:"تقطير يدوي، نكهات ياسمين وخوخ وحموضة لطيفة.", price:19, kcal:5, art:"cup", tag:"محصول الأسبوع", drink:true},
+  {id:"latte", cat:"specialty", name:"لاتيه", desc:"جرعة إسبريسو مزدوجة مع حليب مخفوق ناعم.", price:16, kcal:190, art:"cup", drink:true},
+  {id:"spanish", cat:"specialty", name:"سبانش لاتيه", desc:"إسبريسو مع حليب محلى بالكراميل.", price:18, kcal:260, art:"cup", tag:"الأكثر طلبًا", drink:true},
+  {id:"flat", cat:"specialty", name:"فلات وايت", desc:"قوام مخملي ونكهة بن أوضح.", price:15, kcal:120, art:"cup", drink:true},
+  {id:"cortado", cat:"specialty", name:"كورتادو", desc:"إسبريسو وحليب بنسبة متساوية.", price:13, kcal:90, art:"finjan", drink:true},
+  {id:"dallah", cat:"saudi", name:"دلة قهوة سعودية", desc:"بن خولاني محمّص خفيف مع الهيل، تكفي ٣ أشخاص، مع تمر.", price:25, kcal:10, art:"dallah", tone:"green"},
+  {id:"saffron", cat:"saudi", name:"قهوة سعودية بالزعفران", desc:"زعفران وهيل وقرنفل بالطريقة الحجازية.", price:32, kcal:12, art:"dallah", tag:"جديد", isNew:true, tone:"green"},
+  {id:"tea", cat:"saudi", name:"شاي مغربي بالنعناع", desc:"إبريق صغير بنعناع طازج.", price:14, kcal:40, art:"finjan", tone:"green"},
+  {id:"icespanish", cat:"cold", name:"آيس سبانش لاتيه", desc:"المفضل على الثلج.", price:19, kcal:240, art:"glass", drink:true, tag:"الأكثر طلبًا"},
+  {id:"coldbrew", cat:"cold", name:"كولد برو", desc:"منقوع ١٨ ساعة، ناعم وقليل الحموضة.", price:17, kcal:15, art:"glass", drink:true},
+  {id:"matcha", cat:"cold", name:"آيس ماتشا لاتيه", desc:"ماتشا يابانية درجة احتفالية مع حليب.", price:21, kcal:180, art:"glass", drink:true, tone:"green"},
+  {id:"datecake", cat:"sweet", name:"كيكة التمر بالدبس", desc:"تمر سكري ودبس وصوص تافي دافئ.", price:22, kcal:420, art:"cake", tag:"صنع اليوم"},
+  {id:"saffcheese", cat:"sweet", name:"تشيزكيك الزعفران", desc:"قاعدة بسكويت هيل وكريمة زعفران.", price:26, kcal:380, art:"cake", isNew:true, tag:"جديد"},
+  {id:"cookie", cat:"sweet", name:"كوكيز دبل شوكولاتة", desc:"مقرمشة من الأطراف وطرية من الداخل.", price:12, kcal:310, art:"cookie"},
+  {id:"croissant", cat:"bakery", name:"كرواسون زبدة", desc:"زبدة فرنسية، يُخبز كل صباح.", price:11, kcal:270, art:"croissant"},
+  {id:"zaatar", cat:"bakery", name:"كرواسون زعتر وجبن", desc:"زعتر بلدي وجبنة عكاوي.", price:14, kcal:320, art:"croissant"}
+];
+const OPTS = {
+  size:[{id:"s",name:"صغير",add:0},{id:"m",name:"وسط",add:3},{id:"l",name:"كبير",add:5}],
+  milk:[{id:"full",name:"كامل الدسم",add:0},{id:"oat",name:"شوفان",add:3},{id:"almond",name:"لوز",add:3},{id:"none",name:"بدون حليب",add:0}],
+  sugar:["بدون","خفيف","وسط","زيادة"]
+};
+const byId = id => MENU.find(m => m.id === id);
+const sar = n => (Math.round(n*100)/100).toLocaleString("en-US",{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2}) + " ر.س";
+
+/* ===== الحالة ===== */
+const S = {
+  cat:"specialty", mode:"pickup", pay:"mada", cart:[], coupon:null,
+  stamps:6, points:340, soldOut:new Set(["zaatar"]), nextNo:1047,
+  car:{plate:"", color:""}, address:"",
+  orders:[
+    {no:1046,t:"11:42",items:"سبانش لاتيه ×2",total:36,mode:"درايف ثرو",s:1,online:true},
+    {no:1045,t:"11:35",items:"V60 إثيوبيا، كرواسون زبدة",total:30,mode:"استلام",s:2,online:true},
+    {no:1044,t:"11:20",items:"دلة قهوة سعودية، كيكة التمر",total:47,mode:"داخل المقهى",s:3,online:false},
+    {no:1043,t:"11:02",items:"آيس سبانش ×3، كوكيز",total:69,mode:"توصيل",s:3,online:true},
+    {no:1042,t:"10:48",items:"فلات وايت، كرواسون زعتر",total:29,mode:"استلام",s:3,online:true}
+  ],
+  hourly:[4,9,14,11,8,10,13,16,12,6]
+};
+const BASE_ORDERS = 64, BASE_SALES = 2380;
+const STATUS = ["جديد","قيد التحضير","جاهز","تم التسليم"];
+
+/* ===== أدوات ===== */
+const $ = s => document.querySelector(s);
+let toastT;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2200); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function riyadh(){ return new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Riyadh"})); }
+
+/* ===== الحالة: مفتوح/مغلق وساعات العمل ===== */
+const HOURS = [["السبت",6],["الأحد",0],["الاثنين",1],["الثلاثاء",2],["الأربعاء",3],["الخميس",4],["الجمعة",5]];
+(function(){
+  const now = riyadh(), h = now.getHours(), d = now.getDay();
+  $("#hours").innerHTML = HOURS.map(([n,i]) => `<tr${i===d?' class="today"':''}><td>${n}</td><td class="ltr">${i===5?"1:00 PM – 2:00 AM":"6:00 AM – 2:00 AM"}</td></tr>`).join("");
+  const opensAt = d===5 ? 13 : 6;
+  const open = h < 2 || h >= opensAt;
+  if(!open){ $("#status").classList.add("closed"); $("#statusText").textContent = `مغلق الآن، نفتح الساعة ${opensAt===6?"٦ صباحًا":"١ ظهرًا"} · يمكنك جدولة طلبك`; }
+})();
+
+/* ===== طرق الطلب ===== */
+function setMode(m){
+  S.mode = m;
+  document.querySelectorAll("#modes .mode").forEach(b => b.setAttribute("aria-pressed", b.dataset.mode===m));
+  if(!$("#drawer").hidden) renderCart();
+}
+document.querySelectorAll("#modes .mode").forEach(b => b.addEventListener("click", () => { setMode(b.dataset.mode); toast("طريقة الطلب: " + b.querySelector("b").textContent); }));
+
+/* ===== عرض المنيو ===== */
+function renderCats(){
+  $("#cats").innerHTML = CATS.map(c => `<button class="cat" role="tab" type="button" id="cat-${c.id}" aria-selected="${c.id===S.cat}" data-cat="${c.id}">${c.name}</button>`).join("");
+  document.querySelectorAll("#cats .cat").forEach(b => b.onclick = () => { S.cat = b.dataset.cat; renderCats(); renderMenu(); });
+}
+function renderMenu(){
+  $("#menuGrid").innerHTML = MENU.filter(m => m.cat===S.cat).map(m => {
+    const out = S.soldOut.has(m.id);
+    return `<article class="item${out?" out":""}" data-tone="${m.tone||""}">
+      <div class="art">${ART[m.art]}${out?'<span class="tag">نفد اليوم</span>':m.tag?`<span class="tag${m.isNew?" new":""}">${m.tag}</span>`:""}</div>
+      <div class="body"><h3>${m.name}</h3><p>${m.desc}</p>
+        <div class="meta"><div><div class="price num">${m.price} <small>ر.س</small></div><div class="kcal num">${m.kcal} سعرة حرارية</div></div>
+        <button class="add" type="button" data-add="${m.id}" ${out?"disabled":""} aria-label="أضف ${m.name}">${out?"غير متوفر":"أضف +"}</button></div>
+      </div></article>`;
+  }).join("");
+  document.querySelectorAll("[data-add]").forEach(b => b.onclick = () => {
+    const m = byId(b.dataset.add);
+    if(m.drink) openCustom(m); else { addToCart(m, "", m.price); }
+  });
+}
+document.querySelectorAll("[data-jump]").forEach(b => b.onclick = () => { S.cat = b.dataset.jump; renderCats(); renderMenu(); $("#menu").scrollIntoView(); });
+
+/* ===== التخصيص ===== */
+let cur = null;
+function openCustom(m){
+  cur = {m, size:"m", milk:"full", sugar:1, shot:false, note:""};
+  drawCustom(); $("#custom").hidden = false; document.body.style.overflow = "hidden";
+  setTimeout(()=>$("#customSheet .x").focus(),30);
+}
+function customPrice(){ const c=cur; return c.m.price + OPTS.size.find(o=>o.id===c.size).add + OPTS.milk.find(o=>o.id===c.milk).add + (c.shot?4:0); }
+function drawCustom(){
+  const c = cur, cold = c.m.cat==="cold", noMilk = c.m.id==="v60" || c.m.id==="coldbrew";
+  $("#customSheet").innerHTML = `
+    <div class="art">${ART[c.m.art]}<button class="x" type="button" data-close aria-label="إغلاق">✕</button></div>
+    <div class="in">
+      <div><h3 id="cTitle">${c.m.name}</h3><p style="color:var(--muted);font-size:14px">${c.m.desc}</p></div>
+      <div class="opt-group"><span class="lbl">الحجم</span><div class="chips">${OPTS.size.map(o=>`<button type="button" class="chip" data-size="${o.id}" aria-pressed="${c.size===o.id}">${o.name}${o.add?`<small>+${o.add}</small>`:""}</button>`).join("")}</div></div>
+      ${noMilk?"":`<div class="opt-group"><span class="lbl">نوع الحليب</span><div class="chips">${OPTS.milk.map(o=>`<button type="button" class="chip" data-milk="${o.id}" aria-pressed="${c.milk===o.id}">${o.name}${o.add?`<small>+${o.add}</small>`:""}</button>`).join("")}</div></div>`}
+      <div class="opt-group"><label class="lbl" for="sugar">درجة السكر: <b id="sugarL">${OPTS.sugar[c.sugar]}</b></label><input class="range" type="range" id="sugar" min="0" max="3" value="${c.sugar}"><div class="range-l"><span>بدون</span><span>زيادة</span></div></div>
+      <div class="opt-group"><span class="lbl">إضافات</span><div class="chips"><button type="button" class="chip" data-shot aria-pressed="${c.shot}">شوت إسبريسو إضافي<small>+4</small></button>${cold?'<button type="button" class="chip" aria-pressed="false" data-ice>ثلج أقل</button>':""}</div></div>
+      <div class="field"><label for="cNote">ملاحظة للباريستا</label><input id="cNote" placeholder="مثال: ساخن جدًا" value="${esc(c.note)}"></div>
+      <div class="cta"><button class="btn btn-ink" type="button" id="cAdd">أضف إلى السلة · <span class="num">${sar(customPrice())}</span></button></div>
+    </div>`;
+  const sh = $("#customSheet");
+  sh.querySelectorAll("[data-size]").forEach(b=>b.onclick=()=>{c.size=b.dataset.size;keep();});
+  sh.querySelectorAll("[data-milk]").forEach(b=>b.onclick=()=>{c.milk=b.dataset.milk;keep();});
+  sh.querySelector("[data-shot]").onclick=()=>{c.shot=!c.shot;keep();};
+  const ice = sh.querySelector("[data-ice]"); if(ice) ice.onclick=()=>ice.setAttribute("aria-pressed", ice.getAttribute("aria-pressed")!=="true");
+  sh.querySelector("#sugar").oninput=e=>{c.sugar=+e.target.value; sh.querySelector("#sugarL").textContent=OPTS.sugar[c.sugar];};
+  sh.querySelector("#cNote").oninput=e=>c.note=e.target.value;
+  sh.querySelector("[data-close]").onclick=closeCustom;
+  sh.querySelector("#cAdd").onclick=()=>{
+    const parts=[OPTS.size.find(o=>o.id===c.size).name];
+    if(!noMilk) parts.push("حليب "+OPTS.milk.find(o=>o.id===c.milk).name.replace("كامل الدسم","كامل"));
+    parts.push("سكر "+OPTS.sugar[c.sugar]); if(c.shot) parts.push("شوت إضافي"); if(ice && ice.getAttribute("aria-pressed")==="true") parts.push("ثلج أقل");
+    if(c.note.trim()) parts.push("«"+c.note.trim()+"»");
+    addToCart(c.m, parts.join("، "), customPrice()); closeCustom();
+  };
+  function keep(){ const n=sh.querySelector("#cNote").value; c.note=n; drawCustom(); }
+}
+function closeCustom(){ $("#custom").hidden = true; document.body.style.overflow = ""; }
+$("#custom").addEventListener("click", e => { if(e.target.id==="custom") closeCustom(); });
+
+/* ===== السلة ===== */
+function addToCart(m, opts, unit){
+  const key = m.id+"|"+opts;
+  const ex = S.cart.find(l => l.key===key);
+  if(ex) ex.qty++; else S.cart.push({key, id:m.id, name:m.name, opts, unit, qty:1});
+  updateBadge(); toast("أُضيف " + m.name + " إلى السلة");
+}
+function calc(){
+  const sub = S.cart.reduce((a,l)=>a+l.unit*l.qty,0);
+  const disc = S.coupon ? Math.round(sub*0.10*100)/100 : 0;
+  const del = S.mode==="delivery" && sub>0 && sub-disc<100 ? 12 : 0;
+  const total = Math.max(0, sub - disc + del);
+  const vat = Math.round(total*15/115*100)/100;
+  const cups = S.cart.filter(l=>byId(l.id)?.drink || ["dallah","saffron","tea"].includes(l.id)).reduce((a,l)=>a+l.qty,0);
+  return {sub, disc, del, total, vat, cups};
+}
+function updateBadge(){
+  const n = S.cart.reduce((a,l)=>a+l.qty,0), c = calc();
+  $("#cartCount").textContent = n; $("#fabTotal").textContent = n ? sar(c.total) : "السلة";
+}
+function openCart(){ renderCart(); $("#drawer").hidden=false; $("#scrim").hidden=false; document.body.style.overflow="hidden"; $("#closeCart").focus(); }
+function closeCart(){ $("#drawer").hidden=true; $("#scrim").hidden=true; document.body.style.overflow=""; }
+$("#openCart").onclick = openCart; $("#fabCart").onclick = openCart; $("#closeCart").onclick = closeCart; $("#scrim").onclick = closeCart;
+
+function renderCart(){
+  const body = $("#cartBody"), foot = $("#cartFoot");
+  if(!S.cart.length){
+    body.innerHTML = `<div class="empty"><svg aria-hidden="true"><use href="#i-bag"/></svg><b style="font-family:var(--kufi);color:var(--ink)">سلتك فارغة</b><span>أضف مشروبك المفضل من المنيو.</span><a class="btn btn-ink" href="#menu" id="toMenu">تصفّح المنيو</a></div>`;
+    foot.innerHTML = ""; $("#toMenu").onclick = closeCart; return;
+  }
+  const c = calc();
+  const modeFields = S.mode==="drive"
+    ? `<div class="row2"><div class="field"><label for="plate">رقم اللوحة</label><input id="plate" value="${esc(S.car.plate)}" placeholder="أ ب ج 1234"></div><div class="field"><label for="ccolor">لون السيارة</label><input id="ccolor" value="${esc(S.car.color)}" placeholder="أبيض"></div></div>`
+    : S.mode==="delivery"
+    ? `<div class="field"><label for="addr">عنوان التوصيل</label><input id="addr" value="${esc(S.address)}" placeholder="الحي، الشارع، رقم المبنى"></div>`
+    : `<div class="field"><label for="when">وقت الاستلام</label><select id="when"><option>في أقرب وقت (٧ دقائق تقريبًا)</option><option>بعد ٢٠ دقيقة</option><option>بعد ٤٥ دقيقة</option></select></div>`;
+  body.innerHTML = `
+    ${S.cart.map((l,i)=>`<div class="line"><b>${l.name}</b><span class="lp num">${sar(l.unit*l.qty)}</span>${l.opts?`<span class="opts">${esc(l.opts)}</span>`:"<span></span>"}<div class="qty"><button type="button" data-dec="${i}" aria-label="إنقاص">−</button><span class="num">${l.qty}</span><button type="button" data-inc="${i}" aria-label="زيادة">+</button></div></div>`).join("")}
+    <div class="field"><span class="lbl">طريقة الاستلام</span><div class="seg">${[["pickup","استلام"],["drive","درايف ثرو"],["delivery","توصيل"]].map(([k,n])=>`<button type="button" data-m="${k}" aria-pressed="${S.mode===k}">${n}</button>`).join("")}</div></div>
+    ${modeFields}
+    <div class="field"><span class="lbl">الدفع</span><div class="pay">${[["mada","مدى"],["apple","Apple Pay"],["stc","STC Pay"],["cash","عند الاستلام"]].map(([k,n])=>`<button type="button" data-p="${k}" aria-pressed="${S.pay===k}">${n}</button>`).join("")}</div></div>
+    <div class="field"><label for="coupon">كود الخصم</label><div class="coupon"><input id="coupon" placeholder="MIHMAS10" value="${S.coupon||""}"><button class="btn btn-line" type="button" id="applyC" style="padding:9px 16px">${S.coupon?"إزالة":"تطبيق"}</button></div><span class="err" id="cErr" hidden></span></div>
+    <div class="totals num">
+      <div><span>المجموع</span><span>${sar(c.sub)}</span></div>
+      ${c.disc?`<div><span>خصم MIHMAS10</span><span style="color:var(--good)">− ${sar(c.disc)}</span></div>`:""}
+      ${S.mode==="delivery"?`<div><span>التوصيل</span><span>${c.del?sar(c.del):"مجاني"}</span></div>`:""}
+      <div><span>منها ضريبة القيمة المضافة ١٥٪</span><span>${sar(c.vat)}</span></div>
+      <div class="grand"><span>الإجمالي</span><span>${sar(c.total)}</span></div>
+    </div>`;
+  foot.innerHTML = `<button class="btn btn-saffron" type="button" id="checkout">${S.pay==="cash"?"تأكيد الطلب":"ادفع "+sar(c.total)}</button><p class="earn">ستكسب ${Math.floor(c.total)} نقطة${c.cups?` و${c.cups} ${c.cups===1?"ختم":"أختام"} في بطاقتك`:""}</p>`;
+
+  body.querySelectorAll("[data-inc]").forEach(b=>b.onclick=()=>{S.cart[+b.dataset.inc].qty++;updateBadge();renderCart();});
+  body.querySelectorAll("[data-dec]").forEach(b=>b.onclick=()=>{const l=S.cart[+b.dataset.dec]; l.qty--; if(!l.qty) S.cart.splice(+b.dataset.dec,1); updateBadge(); renderCart();});
+  body.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+  body.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{S.pay=b.dataset.p;renderCart();});
+  const pl=$("#plate"); if(pl){ pl.oninput=e=>S.car.plate=e.target.value; $("#ccolor").oninput=e=>S.car.color=e.target.value; }
+  const ad=$("#addr"); if(ad) ad.oninput=e=>S.address=e.target.value;
+  $("#applyC").onclick=()=>{
+    if(S.coupon){ S.coupon=null; renderCart(); updateBadge(); return; }
+    const v=$("#coupon").value.trim().toUpperCase();
+    if(v==="MIHMAS10"){ S.coupon=v; renderCart(); updateBadge(); toast("تم تطبيق خصم ١٠٪"); }
+    else { const e=$("#cErr"); e.hidden=false; e.textContent = v ? "الكود غير صحيح. جرّب MIHMAS10" : "اكتب كود الخصم أولًا"; }
+  };
+  $("#checkout").onclick = checkout;
+}
+
+/* ===== إتمام الطلب والتتبع ===== */
+function checkout(){
+  if(S.mode==="drive" && !S.car.plate.trim()){ toast("اكتب رقم اللوحة حتى نجد سيارتك"); $("#plate").focus(); return; }
+  if(S.mode==="delivery" && !S.address.trim()){ toast("اكتب عنوان التوصيل"); $("#addr").focus(); return; }
+  const c = calc(), no = S.nextNo++, now = riyadh();
+  const t = String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
+  const modeName = {pickup:"استلام",drive:"درايف ثرو",delivery:"توصيل"}[S.mode];
+  const order = {no, t, items:S.cart.map(l=>l.name+(l.qty>1?" ×"+l.qty:"")).join("، "), total:c.total, mode:modeName, s:0, online:true, mine:true};
+  S.orders.unshift(order);
+  S.points += Math.floor(c.total); S.stamps = Math.min(10, S.stamps + c.cups);
+  S.hourly[S.hourly.length-1]++;
+  S.cart = []; S.coupon = null; updateBadge(); closeCart(); renderOwner(); renderStamps();
+  openTrack(order);
+  // محاكاة تقدم الطلب
+  [4000, 9000, 15000].forEach((ms,i)=>setTimeout(()=>{ if(order.s<i+1){ order.s=i+1; renderOwner(); if(!$("#tracker").hidden && trackNo===no) drawTrack(order); } }, ms));
+}
+let trackNo = null;
+function openTrack(o){ trackNo=o.no; drawTrack(o); $("#tracker").hidden=false; document.body.style.overflow="hidden"; }
+function drawTrack(o){
+  const where = o.mode==="درايف ثرو" ? `سنحضر طلبك إلى سيارتك (${esc(S.car.plate)}${S.car.color?"، "+esc(S.car.color):""}).` : o.mode==="توصيل" ? `المندوب في طريقه إلى: ${esc(S.address)}` : "اذكر رقم الطلب عند الكاشير.";
+  const steps = [["استلمنا طلبك","تم الدفع وأُرسل للباريستا"],["قيد التحضير","نطحن البن الآن"],[o.mode==="توصيل"?"خرج للتوصيل":"جاهز للاستلام",o.mode==="توصيل"?"الوصول خلال ٢٠ دقيقة":"بانتظارك"],["تم التسليم","بالعافية"]];
+  $("#trackSheet").innerHTML = `<div class="track">
+    <div style="display:flex;justify-content:space-between;align-items:start;gap:10px"><div><span class="no num">طلب #${o.no} · ${o.mode}</span><h3 id="tTitle">${["شكرًا، وصلنا طلبك","قهوتك على النار","طلبك جاهز","استمتع بقهوتك"][o.s]}</h3></div><button class="x" type="button" id="tClose" aria-label="إغلاق">✕</button></div>
+    <ol class="steps">${steps.map((s,i)=>`<li class="${i<o.s?"done":i===o.s?"now":""}"><span class="dot">${i<o.s?"✓":""}</span><div><b>${s[0]}</b><span>${s[1]}</span></div></li>`).join("")}</ol>
+    <p class="note">${where} وأضفنا لك ${Math.floor(o.total)} نقطة.</p>
+    <a class="btn btn-line" href="#owner" id="seeOwner">شاهد الطلب في لوحة صاحب المقهى</a>
+  </div>`;
+  $("#tClose").onclick = closeTrack; $("#seeOwner").onclick = closeTrack;
+}
+function closeTrack(){ $("#tracker").hidden=true; document.body.style.overflow=""; }
+$("#tracker").addEventListener("click", e => { if(e.target.id==="tracker") closeTrack(); });
+document.addEventListener("keydown", e => { if(e.key!=="Escape") return; if(!$("#custom").hidden) closeCustom(); else if(!$("#tracker").hidden) closeTrack(); else if(!$("#drawer").hidden) closeCart(); });
+
+/* ===== العروض ===== */
+$("#copyCode").onclick = () => {
+  const done = () => toast("نُسخ الكود MIHMAS10");
+  try{ navigator.clipboard.writeText("MIHMAS10").then(done).catch(()=>toast("الكود: MIHMAS10")); }catch(e){ toast("الكود: MIHMAS10"); }
+};
+
+/* ===== الحجز ===== */
+let space = "table", guests = 2, slot = null;
+const SLOTS = ["09:00","11:00","13:00","16:00","18:00","20:00","22:00"], BUSY = ["13:00","20:00"];
+function setSpace(s){ space=s; document.querySelectorAll("#spaces .space").forEach(b=>b.setAttribute("aria-pressed", b.dataset.space===s)); }
+document.querySelectorAll("#spaces .space").forEach(b=>b.onclick=()=>setSpace(b.dataset.space));
+document.querySelectorAll("a[data-space]").forEach(a=>a.addEventListener("click",()=>setSpace(a.dataset.space)));
+function renderSlots(){
+  $("#slots").innerHTML = SLOTS.map(s=>`<button type="button" class="slot num" data-slot="${s}" aria-pressed="${slot===s}" ${BUSY.includes(s)?"disabled title='محجوز'":""}>${s}</button>`).join("");
+  document.querySelectorAll("[data-slot]").forEach(b=>b.onclick=()=>{slot=b.dataset.slot;renderSlots();});
+}
+renderSlots();
+(function(){ const d=riyadh(); d.setDate(d.getDate()+1); $("#bDate").value=d.toISOString().slice(0,10); $("#bDate").min=riyadh().toISOString().slice(0,10); })();
+$("#gMinus").onclick=()=>{guests=Math.max(1,guests-1);$("#gOut").textContent=guests;};
+$("#gPlus").onclick=()=>{guests=Math.min(space==="event"?20:8,guests+1);$("#gOut").textContent=guests;};
+$("#bookForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const err=$("#bErr"), name=$("#bName").value.trim(), phone=$("#bPhone").value.replace(/\s/g,"");
+  const miss = !slot ? "اختر وقت الحجز." : !name ? "اكتب الاسم." : !/^05\d{8}$/.test(phone) ? "اكتب رقم جوال سعودي من ١٠ أرقام يبدأ بـ 05." : "";
+  if(miss){ err.textContent=miss; err.hidden=false; $("#bOk").hidden=true; return; }
+  err.hidden=true;
+  const code = "MH-" + Math.floor(1000+Math.random()*9000);
+  const sp = {table:"طاولة",study:"غرفة المذاكرة",event:"جلسة خاصة"}[space];
+  $("#bOk").innerHTML = `<b>تم تأكيد حجزك: ${sp}</b><span class="num">${$("#bDate").value} · الساعة ${slot} · ${guests===1?"شخص واحد":guests===2?"شخصان":guests+(guests<11?" أشخاص":" شخصًا")}</span><span>رمز الحجز <b class="num ltr">${code}</b>. أرسلنا التفاصيل برسالة نصية إلى ${esc(phone)}.</span>`;
+  $("#bOk").hidden=false; toast("تم تأكيد الحجز");
+});
+
+/* ===== الولاء ===== */
+function renderStamps(){
+  const cup = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 9h11v4a5.5 5.5 0 0 1-11 0z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/></svg>`;
+  $("#stamps").innerHTML = Array.from({length:10},(_,i)=> i===9 ? `<span class="stamp ${S.stamps>=10?"on":"free"}">${S.stamps>=10?cup:"مجاني"}</span>` : `<span class="stamp${i<S.stamps?" on":""}">${cup}</span>`).join("");
+  const left = Math.max(0, 9 - S.stamps);
+  $("#stampLeft").textContent = S.stamps>=9 ? "كوبك المجاني جاهز" : left===1 ? "باقي كوب واحد" : left===2 ? "باقي كوبان" : `باقي ${left} أكواب`;
+  $("#ptsVal").textContent = S.points.toLocaleString("en-US");
+}
+renderStamps();
+let giftAmt = 100;
+document.querySelectorAll("#giftAmounts .chip").forEach(b=>b.onclick=()=>{giftAmt=+b.dataset.amt;document.querySelectorAll("#giftAmounts .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+$("#addGift").onclick=()=>{
+  const to=$("#giftTo").value.trim();
+  const key="gift"+giftAmt+to;
+  S.cart.push({key,id:"gift",name:`بطاقة هدية ${giftAmt} ر.س`,opts:to?"إلى "+to:"",unit:giftAmt,qty:1});
+  updateBadge(); toast("أُضيفت بطاقة الهدية إلى السلة");
+};
+
+/* ===== لوحة صاحب المقهى ===== */
+function renderOwner(){
+  const mine = S.orders.filter(o=>o.mine);
+  const count = BASE_ORDERS + mine.length, sales = BASE_SALES + mine.reduce((a,o)=>a+o.total,0);
+  const online = 41 + mine.length;
+  $("#kOrders").textContent = count; $("#kSales").textContent = sar(sales); $("#kAvg").textContent = (sales/count).toFixed(1); $("#kOnline").textContent = online;
+  $("#orders").innerHTML = S.orders.map((o,i)=>`<div class="order s${o.s}${o.mine?" mine":""}">
+      <span class="no num">#${o.no}</span>
+      <div class="what"><b>${esc(o.items)}</b><br><span class="num">${o.t}</span> · ${o.mode}${o.online?" · أونلاين":""}${o.mine?" · <b style=\"color:var(--cardamom)\">طلبك التجريبي</b>":""}</div>
+      <div class="order-side"><span class="pill s${o.s}">${STATUS[o.s]}</span>${o.s<3?`<button type="button" class="act" data-adv="${i}">${["قبول وتحضير","جاهز","تم التسليم"][o.s]}</button>`:`<span class="num" style="font-size:12.5px;color:var(--muted)">${sar(o.total)}</span>`}</div>
+    </div>`).join("");
+  document.querySelectorAll("[data-adv]").forEach(b=>b.onclick=()=>{ const o=S.orders[+b.dataset.adv]; o.s=Math.min(3,o.s+1); renderOwner(); if(!$("#tracker").hidden && trackNo===o.no) drawTrack(o); });
+  renderChart();
+}
+function renderChart(){
+  const H = S.hourly, labels = ["٩ص","١٠","١١","١٢م","١","٢","٣","٤","٥","٦م"];
+  const w=420,h=170,pl=26,pb=26,pt=12, max=Math.max(...H, 20), step=(w-pl-8)/H.length, bw=step*.6;
+  const y=v=>pt+(h-pt-pb)*(1-v/max);
+  const ticks=[0,10,20].filter(t=>t<=max);
+  $("#chart").innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="عدد الطلبات حسب الساعة اليوم">
+    ${ticks.map(t=>`<line x1="${pl}" x2="${w-4}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(t)+4}" font-size="10.5" text-anchor="end" fill="var(--muted)" font-family="Almarai">${t}</text>`).join("")}
+    ${H.map((v,i)=>{const x=pl+i*step+(step-bw)/2; const last=i===H.length-1; return `<rect x="${x}" y="${y(v)}" width="${bw}" height="${y(0)-y(v)}" rx="4" fill="${last?"var(--saffron)":"var(--cardamom)"}" opacity="${last?1:.75}"/><text x="${x+bw/2}" y="${h-8}" font-size="10.5" text-anchor="middle" fill="var(--muted)" font-family="Almarai">${labels[i]}</text>${last?`<text x="${x+bw/2}" y="${y(v)-6}" font-size="11" font-weight="700" text-anchor="middle" fill="var(--ink)" font-family="Almarai">${v}</text>`:""}`;}).join("")}
+  </svg>`;
+}
+function renderStock(){
+  const pick = ["spanish","saffron","datecake","saffcheese","croissant","zaatar"];
+  $("#stock").innerHTML = pick.map(id=>{const m=byId(id); return `<label for="st-${id}"><span>${m.name}</span><input class="switch" type="checkbox" id="st-${id}" data-stock="${id}" ${S.soldOut.has(id)?"":"checked"} aria-label="${m.name} متوفر"></label>`;}).join("");
+  document.querySelectorAll("[data-stock]").forEach(c=>c.onchange=()=>{ const id=c.dataset.stock; if(c.checked) S.soldOut.delete(id); else S.soldOut.add(id); renderMenu(); toast(byId(id).name + (c.checked?" متوفر الآن في المنيو":" أُوقف من المنيو")); });
+}
+
+/* ===== تشغيل ===== */
+renderCats(); renderMenu(); renderOwner(); renderStock(); updateBadge();
+// طلب وارد تجريبي بعد قليل ليظهر أن اللوحة حية
+setTimeout(()=>{ S.orders.unshift({no:S.nextNo++,t:"الآن",items:"آيس ماتشا لاتيه، تشيزكيك الزعفران",total:47,mode:"توصيل",s:0,online:true}); S.hourly[S.hourly.length-1]++; renderOwner(); }, 12000);
+</script>
+</body></html>
